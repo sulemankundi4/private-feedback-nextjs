@@ -46,6 +46,29 @@ export const authOptions = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt(token, user) {
+      if (user) {
+        token._id = user._id;
+        token.email = user.email;
+        token.userName = user.userName;
+        token.isVerified = user.isVerified;
+        token.isAcceptingMessage = user.isAcceptingMessage;
+      }
+      return token;
+    },
+    async session(session, token) {
+      if (token) {
+        session.user._id = token._id;
+        session.user.email = token.email;
+        session.user.userName = token.userName;
+        session.user.isVerified = token.isVerified;
+        session.user.isAcceptingMessage = token.isAcceptingMessage;
+      }
+
+      return session;
+    },
+  },
   pages: {
     signIn: "/sign-in",
   },
