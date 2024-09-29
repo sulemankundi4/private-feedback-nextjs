@@ -8,6 +8,7 @@ export const POST = async (req) => {
   await dbConnection();
 
   try {
+    console.log("working");
     const { userName, email, password } = await req.json();
 
     const existingUserVerifiedByUserName = await User.findOne({ userName, isVerified: true });
@@ -49,8 +50,9 @@ export const POST = async (req) => {
       await newUser.save();
     }
 
+    console.log(email, userName, verificationCode);
     const emailResponce = await SendVerificationEmail({ email, userName, verificationCode });
-
+    console.log(emailResponce);
     if (!emailResponce.success) {
       return NextResponse.json({ message: emailResponce.message, success: false }, { status: 500 });
     }

@@ -1,6 +1,17 @@
 import mongoose from "mongoose";
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const messageSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: [true, "The message content is required"],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   userName: {
     type: String,
@@ -44,17 +55,6 @@ const userSchema = new mongoose.Schema({
   messages: {
     type: [messageSchema],
     default: [],
-  },
-});
-
-const messageSchema = new mongoose.Schema({
-  content: {
-    type: String,
-    required: [true, "The message content is required"],
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 

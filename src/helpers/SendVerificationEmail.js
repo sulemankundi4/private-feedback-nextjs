@@ -11,7 +11,9 @@ export const SendVerificationEmail = async ({ email, userName, verificationCode 
       subject: "Verification Email",
       react: VerificationEmail({ userName, verificationCode }),
     });
+    return { success: true };
   } catch (error) {
     console.error("Error sending verification email", error);
+    return { success: false, message: error.message };
   }
 };
