@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import { messageSchema } from "./../schemas/messageSchema";
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const messageSchema = new mongoose.Schema({
+const messageSchemas = new mongoose.Schema({
   content: {
     type: String,
     required: [true, "The message content is required"],
@@ -59,4 +60,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
-export default User;
+const Message = mongoose.models.Message || mongoose.model("Message", messageSchemas);
+
+export { User, Message };
