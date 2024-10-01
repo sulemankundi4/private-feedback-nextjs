@@ -3,6 +3,8 @@ import "./globals.css";
 import { dbConnection } from "../lib/dbConnection";
 import AuthProvider from "@/context/authProvider";
 dbConnection();
+import { Toaster } from "@/components/ui/toaster";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -23,7 +25,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}
+        <Toaster />
+        </body>
       </AuthProvider>
     </html>
   );
